@@ -10,8 +10,7 @@ $(document).ready(function() {
         var formData = $("#loginForm").serialize();
         setTimeout(function() {
             // Simulate a 2-second delay, replace this with your actual login Ajax call
-            $button.prop("disabled", false); // Enable the button
-            $button.html("MASUK"); // Restore button text
+           
 
             const loginUrl = login;
             // Send the login request using Ajax
@@ -20,6 +19,8 @@ $(document).ready(function() {
                 url: loginUrl, // Replace with the actual login route
                 data: formData,
                 success: function(response) {
+                    $button.prop("disabled", false); // Enable the button
+                    $button.html("MASUK"); // Restore button text
 
                     Swal.fire({
                         title: 'Berhasil',
@@ -36,6 +37,9 @@ $(document).ready(function() {
                     });
                 },
                 error: function(xhr, status, error) {
+                    $button.prop("disabled", false); // Enable the button
+                    $button.html("MASUK"); // Restore button text
+                    
                     var errorResponse = xhr
                         .responseJSON; // Parse the JSON response
 
