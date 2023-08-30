@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth.register_page');
     }
 
     /**
@@ -31,8 +31,8 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'nama'      => ['required', 'string', 'max:255'],
-            'username'  => ['required', 'string', 'max:255'],
+            'nama'      => ['required', 'string', 'max:255', 'unique:' . User::class],
+            'username'  => ['required', 'string', 'max:255', 'unique:' . User::class],
             'role'      => ['required', 'in:1,2'],
             'email'     => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password'  => ['required', 'confirmed', Rules\Password::defaults()],
