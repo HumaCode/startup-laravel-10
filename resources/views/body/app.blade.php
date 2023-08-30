@@ -57,7 +57,13 @@
                                     </ol>
                                 </div>
 
+
+
                             </div>
+                        </div>
+
+                        <div class="card">
+                            {{ auth()->user()->nama }}
                         </div>
                     </div>
                     <!-- end page title -->
