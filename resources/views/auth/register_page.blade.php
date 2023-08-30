@@ -41,7 +41,7 @@
                     <h4 class="text-muted text-center font-size-18"><b>Buat Akun Baru</b></h4>
 
                     <div class="p-3">
-                        <form class="form-horizontal mt-3" method="POST" action="{{ route('register') }}">
+                        <form class="form-horizontal mt-3" id="registerForm">
                             @csrf
 
                             <div class="form-group mb-3 row">
@@ -93,8 +93,8 @@
 
                             <div class="form-group text-center row mt-3 pt-1">
                                 <div class="col-12">
-                                    <button class="btn btn-info w-100 waves-effect waves-light"
-                                        type="submit">DAFTAR</button>
+                                    <button class="btn btn-info w-100 waves-effect waves-light" id="registerButton"
+                                        type="button">DAFTAR</button>
                                 </div>
                             </div>
 
@@ -122,9 +122,15 @@
     <script src="{{ asset('assets') }}/libs/metismenu/metisMenu.min.js"></script>
     <script src="{{ asset('assets') }}/libs/simplebar/simplebar.min.js"></script>
     <script src="{{ asset('assets') }}/libs/node-waves/waves.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('assets') }}/js/app.js"></script>
 
+    <script>
+        const register = '{{ route('register') }}';
+        const dashboardUrl = '{{ route('dashboard') }}';
+    </script>
+
+    <script src="{{ asset('assets') }}/js/register.js"></script>
 </body>
 
 </html>

@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
             DB::beginTransaction();
 
             $user = User::create([
-                'nama'      => $request->nama,
+                'nama'      => $request->namas,
                 'username'  => $request->username,
                 'role'      => $request->role,
                 'email'     => $request->email,

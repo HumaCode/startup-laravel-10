@@ -41,7 +41,7 @@
                     <h4 class="text-muted text-center font-size-18"><b>Halaman Login</b></h4>
 
                     <div class="p-3">
-                        <form class="form-horizontal mt-3" method="POST" action="{{ route('login') }}">
+                        <form class="form-horizontal mt-3" id="loginForm">
                             @csrf
 
                             <div class="form-group mb-3 row">
@@ -69,8 +69,8 @@
 
                             <div class="form-group mb-3 text-center row mt-3 pt-1">
                                 <div class="col-12">
-                                    <button class="btn btn-info w-100 waves-effect waves-light"
-                                        type="submit">MASUK</button>
+                                    <button class="btn btn-info w-100 waves-effect waves-light" type="button"
+                                        id="loginButton">MASUK</button>
                                 </div>
                             </div>
 
@@ -102,8 +102,15 @@
     <script src="{{ asset('assets') }}/libs/metismenu/metisMenu.min.js"></script>
     <script src="{{ asset('assets') }}/libs/simplebar/simplebar.min.js"></script>
     <script src="{{ asset('assets') }}/libs/node-waves/waves.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('assets') }}/js/app.js"></script>
+
+    <script>
+        const login = '{{ route('login') }}';
+        const dashboardUrl = '{{ route('dashboard') }}';
+    </script>
+
+    <script src="{{ asset('assets') }}/js/login.js"></script>
 
 </body>
 
