@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dosen;
+use App\Models\Mahasiswa;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -38,13 +41,35 @@ class RegisteredUserController extends Controller
             'password'  => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'nama'      => $request->nama,
-            'username'  => $request->username,
-            'role'      => $request->role,
-            'email'     => $request->email,
-            'password'  => Hash::make($request->password),
-        ]);
+
+
+        try {
+            DB::beginTransaction();
+
+            $user = User::create([
+                'nama'      => $request->nama,
+                'username'  => $request->username,
+                'role'      => $request->role,
+                'email'     => $request->email,
+                'password'  => Hash::make($request->password),
+            ]);
+
+            if ($request->role == 2) {
+                Mahasiswa::create([
+                    'id_user' => $user->id,
+                ]);
+            } elseif ($request->role == 1) {
+                Dosen::create([
+                    'id_user' => $user->id,
+                ]);
+            }
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            throw $th;
+        }
 
         event(new Registered($user));
 
